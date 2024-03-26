@@ -1,22 +1,14 @@
-import React, { forwardRef, useState } from "react";
+import React, { useState } from "react";
 
-const Preferences = forwardRef((props, ref) => {
-  const [wantsNewProdInfo, setWantsNewProdInfo] = useState(false);
-  const [wantsProdUpdateInfo, setWantsProdUpdateInfo] = useState(false);
-  function changeNewProdPrefHandler() {
-    setWantsNewProdInfo((prevPref) => !prevPref);
-  }
-  function changeUpdateProdPrefHandler() {
-    setWantsProdUpdateInfo((prevPref) => !prevPref);
-  }
+const Preferences = ({ newProdInfo, prodUpdateInfo, onUpdateInfo }) => {
   return (
     <div>
       <label>
         <input
           type="checkbox"
           id="pref-new"
-          checked={wantsNewProdInfo}
-          onChange={changeNewProdPrefHandler}
+          checked={newProdInfo}
+          onChange={onUpdateInfo.bind(null, "pref-new")}
         />
         <span>New Products</span>
       </label>
@@ -24,13 +16,13 @@ const Preferences = forwardRef((props, ref) => {
         <input
           type="checkbox"
           id="pref-updates"
-          checked={wantsProdUpdateInfo}
-          onChange={changeUpdateProdPrefHandler}
+          checked={prodUpdateInfo}
+          onChange={onUpdateInfo.bind(null, "pref-updates")}
         />
         <span>Product Updates</span>
       </label>
     </div>
   );
-});
+};
 
 export default Preferences;
